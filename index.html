@@ -80,6 +80,24 @@
             padding: 140px 0;
             text-align: center;
             position: relative;
+        }.hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 160px; /* Diperlebar dari 60px menjadi 160px agar transisi sangat landai */
+            
+            /* Menggunakan multi-stop agar perubahan warna melengkung halus, bukan lurus kaku */
+            background: linear-gradient(
+                to top,
+                #f9fbf9 0%,                  /* Warna latar website penuh */
+                rgba(249, 251, 249, 0.85) 20%,
+                rgba(249, 251, 249, 0.60) 42%,
+                rgba(249, 251, 249, 0.30) 67%,
+                rgba(249, 251, 249, 0.10) 85%,
+                transparent 100%             /* Sepenuhnya transparan */
+            );
         }
         .hero-logo {
             max-width: 140px;
