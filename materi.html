@@ -103,6 +103,15 @@
             padding: 40px 0;
             margin-top: 80px;
         }
+
+        /* Loader */
+        .loader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 0;
+        }
     </style>
 </head>
 <body>
@@ -142,64 +151,13 @@
         </div>
 
         <div class="row g-3" id="materiList">
-            
-            <div class="col-12 materi-item">
-                <div class="card card-materi p-3 p-md-4 d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3">
-                    <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center gap-3 w-100">
-                        <div class="icon-box flex-shrink-0">
-                            <i class="fas fa-file-pdf"></i>
-                        </div>
-                        <div class="flex-grow-1">
-                            <span class="badge bg-warning mb-2">TKA KELAS 6</span>
-                            <h5 class="fw-bold text-dark mb-1">Materi Pembahasan Matematika</h5>
-                            <p class="text-muted small mb-0">Pembahasan lengkap pembelajaran matematika mulai dari dasar hingga lanjutan disertai contoh soal, pembahasan langkah demi langkah</p>
-                        </div>
-                    </div>
-                    <div class="d-flex gap-2 w-100 w-md-auto justify-content-sm-start justify-content-md-end mt-2 mt-md-0">
-                        <a href="https://drive.google.com/file/d/1lRCimQ3_QMZ1hPCf_12SZvJ7H5Id8l76/view?usp=sharing" target="_blank" class="btn btn-view rounded-pill px-4 py-2 small"><i class="fas fa-eye me-1"></i> Baca</a>
-                        <a href="https://drive.google.com/uc?export=download&id=1lRCimQ3_QMZ1hPCf_12SZvJ7H5Id8l76" download class="btn btn-download rounded-pill px-4 py-2 small"><i class="fas fa-download me-1"></i> Unduh</a>
-                    </div>
+            <!-- Loading Indicator Animation -->
+            <div id="loading" class="col-12 loader-container">
+                <div class="spinner-border text-success" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
                 </div>
+                <p class="text-muted mt-3">Sedang mengambil materi dari database...</p>
             </div>
-
-            <div class="col-12 materi-item">
-                <div class="card card-materi p-3 p-md-4 d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3">
-                    <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center gap-3 w-100">
-                        <div class="icon-box flex-shrink-0">
-                            <i class="fas fa-file-pdf"></i>
-                        </div>
-                        <div class="flex-grow-1">
-                            <span class="badge bg-warning mb-2">PRAMUKA</span>
-                            <h5 class="fw-bold text-dark mb-1">Materi untuk SKU NO. 2-3-4</h5>
-                            <p class="text-muted small mb-0">Modul interaktif memahami konsep SKU Penggalang menggunakan ilustrasi gambar yang menarik.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex gap-2 w-100 w-md-auto justify-content-sm-start justify-content-md-end mt-2 mt-md-0">
-                        <a href="https://drive.google.com/file/d/1ooxDcLkVELgpwRHx4cZQsi7AKMt_kfIy/view?usp=drive_link" target="_blank" class="btn btn-view rounded-pill px-4 py-2 small"><i class="fas fa-eye me-1"></i> Baca</a>
-                        <a href="https://drive.google.com/uc?export=download&id=1ooxDcLkVELgpwRHx4cZQsi7AKMt_kfIy" download class="btn btn-download rounded-pill px-4 py-2 small"><i class="fas fa-download me-1"></i> Unduh</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 materi-item">
-                <div class="card card-materi p-3 p-md-4 d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3">
-                    <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center gap-3 w-100">
-                        <div class="icon-box flex-shrink-0">
-                            <i class="fas fa-file-pdf"></i>
-                        </div>
-                        <div class="flex-grow-1">
-                            <span class="badge bg-warning mb-2">PRAMUKA</span>
-                            <h5 class="fw-bold text-dark mb-1">Materi untuk SKU NO. 14-15</h5>
-                            <p class="text-muted small mb-0">Modul interaktif memahami konsep SKU Penggalang menggunakan ilustrasi gambar yang menarik.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex gap-2 w-100 w-md-auto justify-content-sm-start justify-content-md-end mt-2 mt-md-0">
-                        <a href="https://drive.google.com/file/d/1FripdykhT_9rut2b2kWUH_cs4J1OijmL/view?usp=drive_link" target="_blank" class="btn btn-view rounded-pill px-4 py-2 small"><i class="fas fa-eye me-1"></i> Baca</a>
-                        <a href="https://drive.google.com/uc?export=download&id=1FripdykhT_9rut2b2kWUH_cs4J1OijmL" download class="btn btn-download rounded-pill px-4 py-2 small"><i class="fas fa-download me-1"></i> Unduh</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
         <div id="noResults" class="text-center py-5 d-none">
@@ -219,26 +177,68 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
+        // MASUKKAN URL WEB APP ANDA DI SINI
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwRF85cNbbwzolIsMRSWdej8gb9MUlk_jhuHOHjnEzPHmU8no3r9GjCFUQXkkOLnlEh/exec'; 
+        
+        const materiList = document.getElementById('materiList');
+        const loading = document.getElementById('loading');
+
+        // Mengambil data dari Google Sheet
+        fetch(scriptURL)
+            .then(response => response.json())
+            .then(data => {
+                loading.style.display = 'none'; // Hilangkan animasi loading
+                let htmlContent = '';
+
+                data.forEach(item => {
+                    htmlContent += `
+                    <div class="col-12 materi-item">
+                        <div class="card card-materi p-3 p-md-4 d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3">
+                            <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center gap-3 w-100">
+                                <div class="icon-box flex-shrink-0">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <span class="badge bg-warning mb-2">${item.kategori}</span>
+                                    <h5 class="fw-bold text-dark mb-1">${item.judul}</h5>
+                                    <p class="text-muted small mb-0">${item.deskripsi}</p>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2 w-100 w-md-auto justify-content-sm-start justify-content-md-end mt-2 mt-md-0">
+                                <a href="${item.linkBaca}" target="_blank" class="btn btn-view rounded-pill px-4 py-2 small"><i class="fas fa-eye me-1"></i> Baca</a>
+                                <a href="${item.linkUnduh}" download class="btn btn-download rounded-pill px-4 py-2 small"><i class="fas fa-download me-1"></i> Unduh</a>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                });
+
+                materiList.innerHTML = htmlContent;
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                loading.innerHTML = '<p class="text-danger">Gagal memuat materi. Pastikan URL Web App sudah benar dan dapat diakses.</p>';
+            });
+
+        // Fitur Pencarian Dinamis
         document.getElementById('searchInput').addEventListener('input', function() {
             const keyword = this.value.toLowerCase();
             const materiItems = document.querySelectorAll('.materi-item');
             let foundAny = false;
 
             materiItems.forEach(function(item) {
-                // Mengambil teks di dalam tag <h5> (Judul Materi)
                 const judul = item.querySelector('h5').textContent.toLowerCase();
                 
                 if (judul.includes(keyword)) {
-                    item.classList.remove('d-none'); // Tampilkan jika cocok
+                    item.classList.remove('d-none');
                     foundAny = true;
                 } else {
-                    item.classList.add('d-none');    // Sembunyikan jika tidak cocok
+                    item.classList.add('d-none');
                 }
             });
 
-            // Menampilkan/menyembunyikan pesan "Materi Tidak Ditemukan"
             const noResultsMessage = document.getElementById('noResults');
-            if (foundAny) {
+            if (foundAny || materiItems.length === 0) { 
                 noResultsMessage.classList.add('d-none');
             } else {
                 noResultsMessage.classList.remove('d-none');
