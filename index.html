@@ -484,59 +484,21 @@
         </div>
     </section>
 
-    <section id="prestasi" class="prestasi-section">
+        <section id="prestasi" class="prestasi-section">
         <div class="container fade-in">
             <h2 class="section-title text-warning">Galeri Madrasah</h2>
-            <div id="prestasiCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="prestasi-card">
-                            <div class="row align-items-center g-4">
-                                    <div class="col-md-6">
-                                    <div class="prestasi-img-container">
-                                        <img src="https://i.ibb.co.com/bjtpPTZJ/IMG-4543.jpg" alt="Persiapan Kemah HSN">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 text-start">
-                                    <span class="text-warning fw-bold text-uppercase tracking-wider small d-block mb-1">Tingkat Kabupaten</span>
-                                    <h3 class="fw-bold text-white mb-3"><i class="fas fa-trophy text-warning me-2"></i>Kemah Hari Santri 2025</h3>
-                                    <p class="text-light opacity-75 lh-lg">Menempa kemandirian dan mempererat ukhuwah di bumi perkemahan, siap melanjutkan perjuangan para ulama. Selamat Hari Santri Nasional 2025!</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="prestasi-card">
-                            <div class="row align-items-center g-4">
-                                <div class="col-md-6">
-                                    <div class="prestasi-img-container">
-                                        <img src="https://i.ibb.co.com/S4KdJS8P/Whats-App-Image-2026-05-26-at-08-44-22.jpg" alt="TKA 2025">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 text-start">
-                                    <span class="text-warning fw-bold text-uppercase tracking-wider small d-block mb-1">Giat Madrasah</span>
-                                    <h3 class="fw-bold text-white mb-3"><i class="fas fa-medal text-warning me-2"></i>Sudut TKA</h3>
-                                    <p class="text-light opacity-75 lh-lg">Ujian boleh serius, tapi senyum dan canda tetap tak boleh hilang. Intip momen hangat penuh tawa para siswa di sela-sela rehat Tes Kemampuan Akademik (TKA) hari ini!</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="prestasi-card">
-                            <div class="row align-items-center g-4">
-                                <div class="col-md-6">
-                                    <div class="prestasi-img-container">
-                                        <img src="https://i.ibb.co.com/cSxNG5L7/IMG-5685.jpg" alt="Perpisahan Kelas 6">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 text-start">
-                                    <span class="text-warning fw-bold text-uppercase tracking-wider small d-block mb-1">Giat Madrasah</span>
-                                    <h3 class="fw-bold text-white mb-3"><i class="fas fa-award text-warning me-2"></i>Pelepasan Siswa</h3>
-                                    <p class="text-light opacity-75 lh-lg">Melepas dengan rasa bangga, mengantar dengan doa menuju cita-cita. Selamat menempuh jenjang pendidikan yang lebih tinggi untuk seluruh siswa-siswi tercinta. Jadilah pembawa perubahan di mana pun kalian berada!</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            
+            <!-- Indikator Loading Galeri -->
+            <div id="loading-galeri" class="text-center py-5">
+                <div class="spinner-border text-warning" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-3 text-light opacity-75 small">Memuat galeri...</p>
+            </div>
+
+            <div id="prestasiCarousel" class="carousel slide" data-bs-ride="carousel" style="display: none;">
+                <div class="carousel-inner" id="galeri-container">
+                    <!-- Galeri akan dirender di sini oleh JavaScript -->
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#prestasiCarousel" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -643,69 +605,101 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
+            <script>
         // MASUKKAN URL WEB APP ANDA DI SINI
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwRF85cNbbwzolIsMRSWdej8gb9MUlk_jhuHOHjnEzPHmU8no3r9GjCFUQXkkOLnlEh/exec';
 
-        async function loadBerita() {
+        async function loadData() {
             try {
                 const response = await fetch(scriptURL);
-                const data = await response.json();
+                const data = await response.json(); // Sekarang menerima { berita: [...], galeri: [...] }
 
-                const container = document.getElementById('berita-container');
-                const loading = document.getElementById('loading-berita');
-                let htmlContent = '';
+                // --- 1. RENDER BERITA ---
+                const containerBerita = document.getElementById('berita-container');
+                const loadingBerita = document.getElementById('loading-berita');
+                let htmlBerita = '';
 
-                data.forEach(item => {
-                    // Logika pewarnaan badge otomatis berdasarkan teks kategori
-                    let badgeClass = 'bg-success'; 
-                    let kategoriLower = item.Kategori ? item.Kategori.toLowerCase() : '';
-                    
-                    if(kategoriLower.includes('kegiatan')) {
-                        badgeClass = 'bg-warning text-dark';
-                    } else if(kategoriLower.includes('pengumuman')) {
-                        badgeClass = 'bg-info text-dark';
-                    }
+                if (data.berita && data.berita.length > 0) {
+                    data.berita.forEach(item => {
+                        let badgeClass = 'bg-success'; 
+                        let kategoriLower = item.Kategori ? item.Kategori.toLowerCase() : '';
+                        if(kategoriLower.includes('kegiatan')) { badgeClass = 'bg-warning text-dark'; } 
+                        else if(kategoriLower.includes('pengumuman')) { badgeClass = 'bg-info text-dark'; }
 
-                    // Tentukan ikon link
-                    let linkIcon = item.Link && item.Link.includes('instagram.com') ? 'fab fa-instagram ms-1' : 'fas fa-arrow-right ms-1';
-                    let linkText = item.Link && item.Link.includes('instagram.com') ? 'Lihat di Instagram' : 'Baca Selengkapnya';
+                        let linkIcon = item.Link && item.Link.includes('instagram.com') ? 'fab fa-instagram ms-1' : 'fas fa-arrow-right ms-1';
+                        let linkText = item.Link && item.Link.includes('instagram.com') ? 'Lihat di Instagram' : 'Baca Selengkapnya';
 
-                    htmlContent += `
-                        <div class="col-md-4">
-                            <div class="card h-100 position-relative">
-                                <div class="position-relative overflow-hidden">
-                                    <img src="${item.Gambar}" class="card-img-top news-img" alt="${item.Judul}">
-                                </div>
-                                <div class="card-body p-4 d-flex flex-column justify-content-between">
-                                    <div>
-                                        <span class="badge ${badgeClass} mb-2 px-2.5 py-1.5 rounded-pill fw-semibold">${item.Kategori}</span>
-                                        <h5 class="card-title fw-bold text-dark">${item.Judul}</h5>
-                                        <p class="card-text text-muted small lh-lg">${item.Deskripsi}</p>
+                        htmlBerita += `
+                            <div class="col-md-4">
+                                <div class="card h-100 position-relative">
+                                    <div class="position-relative overflow-hidden">
+                                        <img src="${item.Gambar}" class="card-img-top news-img" alt="${item.Judul}">
                                     </div>
-                                    <div class="text-end mt-3">
-                                        <a href="${item.Link}" target="_blank" class="stretched-link text-decoration-none text-success small fw-semibold">${linkText} <i class="${linkIcon}"></i></a>
+                                    <div class="card-body p-4 d-flex flex-column justify-content-between">
+                                        <div>
+                                            <span class="badge ${badgeClass} mb-2 px-2.5 py-1.5 rounded-pill fw-semibold">${item.Kategori}</span>
+                                            <h5 class="card-title fw-bold text-dark">${item.Judul}</h5>
+                                            <p class="card-text text-muted small lh-lg">${item.Deskripsi}</p>
+                                        </div>
+                                        <div class="text-end mt-3">
+                                            <a href="${item.Link}" target="_blank" class="stretched-link text-decoration-none text-success small fw-semibold">${linkText} <i class="${linkIcon}"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    `;
-                });
+                        `;
+                    });
+                    containerBerita.innerHTML = htmlBerita;
+                    loadingBerita.style.display = 'none';
+                    containerBerita.style.display = 'flex';
+                }
 
-                container.innerHTML = htmlContent;
-                loading.style.display = 'none'; // Sembunyikan loading
-                container.style.display = 'flex'; // Tampilkan container berita
+                // --- 2. RENDER GALERI ---
+                const containerGaleri = document.getElementById('galeri-container');
+                const loadingGaleri = document.getElementById('loading-galeri');
+                const carousel = document.getElementById('prestasiCarousel');
+                let htmlGaleri = '';
+
+                if (data.galeri && data.galeri.length > 0) {
+                    data.galeri.forEach((item, index) => {
+                        let activeClass = index === 0 ? 'active' : '';
+                        let iconClass = item.Ikon ? item.Ikon : 'fas fa-award'; // Default icon
+                        
+                        htmlGaleri += `
+                            <div class="carousel-item ${activeClass}">
+                                <div class="prestasi-card">
+                                    <div class="row align-items-center g-4">
+                                        <div class="col-md-6">
+                                            <div class="prestasi-img-container">
+                                                <img src="${item.Gambar}" alt="${item.Judul}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 text-start">
+                                            <span class="text-warning fw-bold text-uppercase tracking-wider small d-block mb-1">${item.Label}</span>
+                                            <h3 class="fw-bold text-white mb-3"><i class="${iconClass} text-warning me-2"></i>${item.Judul}</h3>
+                                            <p class="text-light opacity-75 lh-lg">${item.Deskripsi}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    containerGaleri.innerHTML = htmlGaleri;
+                    loadingGaleri.style.display = 'none';
+                    carousel.style.display = 'block';
+                }
 
             } catch (error) {
                 console.error('Error memuat data:', error);
                 document.getElementById('loading-berita').innerHTML = '<p class="text-danger text-center">Gagal memuat berita. Silakan muat ulang halaman.</p>';
+                document.getElementById('loading-galeri').innerHTML = '<p class="text-danger text-center">Gagal memuat galeri. Silakan muat ulang halaman.</p>';
             }
         }
 
         // Script untuk Animasi Scroll (Fade In)
         document.addEventListener("DOMContentLoaded", function() {
-            // Panggil fungsi loadBerita saat halaman dimuat
-            loadBerita();
+            // Panggil fungsi loadData saat halaman dimuat
+            loadData();
 
             const observerOptions = {
                 root: null,
