@@ -424,66 +424,26 @@
         </div>
     </section>
 
-    <section id="berita" class="bg-light">
+        <section id="berita" class="bg-light">
         <div class="container fade-in">
             <h2 class="section-title">Berita & Kegiatan Terbaru</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card h-100 position-relative">
-                        <div class="position-relative overflow-hidden">
-                            <img src="https://i.ibb.co.com/tpt2RNrW/IMG-6171.jpg" class="card-img-top news-img" alt="Perpisahan & Pelepasan">
-                        </div>
-                        <div class="card-body p-4 d-flex flex-column justify-content-between">
-                            <div>
-                                <span class="badge bg-warning text-dark mb-2 px-2.5 py-1.5 rounded-pill fw-semibold">Kegiatan</span>
-                                <h5 class="card-title fw-bold text-dark">Acara Perpisahan & Pelepasan Peserta Didik TA 2025/2026</h5>
-                                <p class="card-text text-muted small lh-lg">Kabupaten Sorong, 6 Juni 2026 – MIS Roudlotul Khuffadz sukses menggelar acara perpisahan dan pelepasan siswa kelas VI dengan penuh khidmat dan rasa haru. Acara dimeriahkan oleh penampilan memukau dari tim Hadrah dan Seni Tari sekolah yang disaksikan langsung oleh para wali murid serta tamu undangan.</p>
-                            </div>
-                            <div class="text-end mt-3">
-                                <a href="https://www.instagram.com/mi.roudlotulkhuffadz/" target="_blank" class="stretched-link text-decoration-none text-success small fw-semibold">Lihat di Instagram <i class="fab fa-instagram ms-1"></i></a>
-                            </div>
-                        </div>
-                    </div>
+            
+            <!-- Indikator Loading -->
+            <div id="loading-berita" class="text-center py-5">
+                <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
                 </div>
-                <div class="col-md-4">
-                    <div class="card h-100 position-relative">
-                        <div class="position-relative overflow-hidden">
-                            <img src="https://i.ibb.co.com/39XST3Lm/Whats-App-Image-2026-05-26-at-08-44-18.jpg" class="card-img-top news-img" alt="Tes Kemampuan Academic">
-                        </div>
-                        <div class="card-body p-4 d-flex flex-column justify-content-between">
-                            <div>
-                                <span class="badge bg-success mb-2 px-2.5 py-1.5 rounded-pill fw-semibold">Akademik</span>
-                                <h5 class="card-title fw-bold text-dark">Tes Kemampuan Akademik (TKA) 2026</h5>
-                                <p class="card-text text-muted small lh-lg">Kabupaten Sorong, 23 Juni 2026 – Dalam rangka memetakan potensi akademik dan kesiapan belajar peserta didik, MIS Roudlotul Khuffadz sukses menyelenggarakan Tes Kemampuan Akademik (TKA) hari ini. Hasil evaluasi menjadi tolok ukur penting bagi pengembangan kurikulum madrasah ke depan.</p>
-                            </div>
-                            <div class="text-end mt-3">
-                                <a href="https://www.instagram.com/p/DXbsWfMDN9E/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="stretched-link text-decoration-none text-success small fw-semibold">Lihat di Instagram <i class="fab fa-instagram ms-1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 position-relative">
-                        <div class="position-relative overflow-hidden">
-                            <img src="https://i.ibb.co.com/HTVPQXxn/Screenshot-2026-06-08-115511.png" class="card-img-top news-img" alt="Penerimaan Siswa Baru">
-                        </div>
-                        <div class="card-body p-4 d-flex flex-column justify-content-between">
-                            <div>
-                                <span class="badge bg-info text-dark mb-2 px-2.5 py-1.5 rounded-pill fw-semibold">Pengumuman</span>
-                                <h5 class="card-title fw-bold text-dark">Penerimaan Siswa Baru TA 2026/2027</h5>
-                                <p class="card-text text-muted small lh-lg">Pendaftaran Peserta Didik Baru (PPDB) MIS Roudlotul Khuffadz resmi dibuka dari 23 Februari s.d. 30 Juni 2026. Mari bentuk generasi cerdas dan berakhlak mulia—segera kunjungi madrasah kami untuk daftar langsung sebelum kuota terpenuhi!</p>
-                            </div>
-                            <div class="text-end mt-3">
-                                <a href="https://www.instagram.com/p/DWCSOyfE4f5/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="stretched-link text-decoration-none text-success small fw-semibold">Lihat di Instagram <i class="fab fa-instagram ms-1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <p class="mt-3 text-muted small">Menarik data terbaru...</p>
+            </div>
+
+            <!-- Tempat Data Berita Ditampilkan -->
+            <div class="row g-4" id="berita-container" style="display: none;">
+                <!-- Berita akan dirender di sini oleh JavaScript -->
             </div>
         </div>
     </section>
 
-    <section id="ekskul">
+<section id="ekskul">
         <div class="container fade-in">
             <h2 class="section-title">Program Ekstrakurikuler</h2>
             <div class="row g-4">
@@ -683,9 +643,70 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
+        <script>
+        // MASUKKAN URL WEB APP ANDA DI SINI
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwRF85cNbbwzolIsMRSWdej8gb9MUlk_jhuHOHjnEzPHmU8no3r9GjCFUQXkkOLnlEh/exec';
+
+        async function loadBerita() {
+            try {
+                const response = await fetch(scriptURL);
+                const data = await response.json();
+
+                const container = document.getElementById('berita-container');
+                const loading = document.getElementById('loading-berita');
+                let htmlContent = '';
+
+                data.forEach(item => {
+                    // Logika pewarnaan badge otomatis berdasarkan teks kategori
+                    let badgeClass = 'bg-success'; 
+                    let kategoriLower = item.Kategori ? item.Kategori.toLowerCase() : '';
+                    
+                    if(kategoriLower.includes('kegiatan')) {
+                        badgeClass = 'bg-warning text-dark';
+                    } else if(kategoriLower.includes('pengumuman')) {
+                        badgeClass = 'bg-info text-dark';
+                    }
+
+                    // Tentukan ikon link
+                    let linkIcon = item.Link && item.Link.includes('instagram.com') ? 'fab fa-instagram ms-1' : 'fas fa-arrow-right ms-1';
+                    let linkText = item.Link && item.Link.includes('instagram.com') ? 'Lihat di Instagram' : 'Baca Selengkapnya';
+
+                    htmlContent += `
+                        <div class="col-md-4">
+                            <div class="card h-100 position-relative">
+                                <div class="position-relative overflow-hidden">
+                                    <img src="${item.Gambar}" class="card-img-top news-img" alt="${item.Judul}">
+                                </div>
+                                <div class="card-body p-4 d-flex flex-column justify-content-between">
+                                    <div>
+                                        <span class="badge ${badgeClass} mb-2 px-2.5 py-1.5 rounded-pill fw-semibold">${item.Kategori}</span>
+                                        <h5 class="card-title fw-bold text-dark">${item.Judul}</h5>
+                                        <p class="card-text text-muted small lh-lg">${item.Deskripsi}</p>
+                                    </div>
+                                    <div class="text-end mt-3">
+                                        <a href="${item.Link}" target="_blank" class="stretched-link text-decoration-none text-success small fw-semibold">${linkText} <i class="${linkIcon}"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML = htmlContent;
+                loading.style.display = 'none'; // Sembunyikan loading
+                container.style.display = 'flex'; // Tampilkan container berita
+
+            } catch (error) {
+                console.error('Error memuat data:', error);
+                document.getElementById('loading-berita').innerHTML = '<p class="text-danger text-center">Gagal memuat berita. Silakan muat ulang halaman.</p>';
+            }
+        }
+
         // Script untuk Animasi Scroll (Fade In)
         document.addEventListener("DOMContentLoaded", function() {
+            // Panggil fungsi loadBerita saat halaman dimuat
+            loadBerita();
+
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
