@@ -592,7 +592,7 @@
         async function loadData() {
             const CACHE_KEY = 'rk_data_cache';
             const CACHE_TIME_KEY = 'rk_data_time';
-            const CACHE_EXPIRY = 30 * 60 * 1000; // Cache valid 30 menit
+            const CACHE_EXPIRY = 5 * 60 * 1000; // Cache valid 30 menit
             const now = new Date().getTime();
 
             const cachedData = localStorage.getItem(CACHE_KEY);
