@@ -104,13 +104,18 @@
             margin-top: 80px;
         }
 
-        /* Loader */
-        .loader-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 0;
+        /* Skeleton Loader Animation */
+        @keyframes shimmer {
+            0% { background-position: -468px 0; }
+            100% { background-position: 468px 0; }
+        }
+        .skeleton-box {
+            background: #e2e8f0;
+            background-image: linear-gradient(to right, #e2e8f0 0%, #f1f5f9 20%, #e2e8f0 40%, #e2e8f0 100%);
+            background-repeat: no-repeat;
+            background-size: 800px 100%; 
+            animation: shimmer 1.5s infinite linear forwards;
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -151,12 +156,27 @@
         </div>
 
         <div class="row g-3" id="materiList">
-            <!-- Loading Indicator Animation -->
-            <div id="loading" class="col-12 loader-container">
-                <div class="spinner-border text-success" style="width: 3rem; height: 3rem;" role="status">
-                    <span class="visually-hidden">Loading...</span>
+            <div id="loading" class="col-12 w-100">
+                <div class="card card-materi p-4 mb-3 w-100">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="skeleton-box" style="width: 55px; height: 55px; border-radius: 12px;"></div>
+                        <div class="flex-grow-1">
+                            <div class="skeleton-box mb-2" style="width: 80px; height: 20px; border-radius: 50px;"></div>
+                            <div class="skeleton-box mb-2" style="width: 60%; height: 24px;"></div>
+                            <div class="skeleton-box" style="width: 40%; height: 15px;"></div>
+                        </div>
+                    </div>
                 </div>
-                <p class="text-muted mt-3">Sedang mengambil materi dari database...</p>
+                <div class="card card-materi p-4 w-100">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="skeleton-box" style="width: 55px; height: 55px; border-radius: 12px;"></div>
+                        <div class="flex-grow-1">
+                            <div class="skeleton-box mb-2" style="width: 80px; height: 20px; border-radius: 50px;"></div>
+                            <div class="skeleton-box mb-2" style="width: 50%; height: 24px;"></div>
+                            <div class="skeleton-box" style="width: 30%; height: 15px;"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -177,48 +197,63 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // MASUKKAN URL WEB APP ANDA DI SINI
         const scriptURL = 'https://script.google.com/macros/s/AKfycbyEZizBAiiIw2HHNRMzEWuzrrjfI-CHx8_HGofv2C7z8hWeJFaf4CyLJWaOA-xU7iEf/exec'; 
         
         const materiList = document.getElementById('materiList');
         const loading = document.getElementById('loading');
 
-        // Mengambil data dari Google Sheet
-        fetch(scriptURL)
-            .then(response => response.json())
-            .then(data => {
-                loading.style.display = 'none'; // Hilangkan animasi loading
-                let htmlContent = '';
+        const MATERI_CACHE_KEY = 'rk_materi_cache';
+        const MATERI_TIME_KEY = 'rk_materi_time';
+        const CACHE_EXPIRY = 30 * 60 * 1000; // 30 menit
+        const now = new Date().getTime();
 
-                data.forEach(item => {
-                    htmlContent += `
-                    <div class="col-12 materi-item">
-                        <div class="card card-materi p-3 p-md-4 d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3">
-                            <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center gap-3 w-100">
-                                <div class="icon-box flex-shrink-0">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <span class="badge bg-warning mb-2">${item.kategori}</span>
-                                    <h5 class="fw-bold text-dark mb-1">${item.judul}</h5>
-                                    <p class="text-muted small mb-0">${item.deskripsi}</p>
-                                </div>
+        const cachedData = localStorage.getItem(MATERI_CACHE_KEY);
+        const cacheTime = localStorage.getItem(MATERI_TIME_KEY);
+
+        if (cachedData && cacheTime && (now - cacheTime < CACHE_EXPIRY)) {
+            renderMateri(JSON.parse(cachedData));
+        } else {
+            fetch(scriptURL)
+                .then(response => response.json())
+                .then(data => {
+                    localStorage.setItem(MATERI_CACHE_KEY, JSON.stringify(data));
+                    localStorage.setItem(MATERI_TIME_KEY, now.toString());
+                    renderMateri(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    loading.innerHTML = '<p class="text-danger">Gagal memuat materi. Pastikan koneksi Anda stabil.</p>';
+                });
+        }
+
+        function renderMateri(data) {
+            let htmlContent = '';
+
+            data.forEach(item => {
+                htmlContent += `
+                <div class="col-12 materi-item">
+                    <div class="card card-materi p-3 p-md-4 d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3">
+                        <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center gap-3 w-100">
+                            <div class="icon-box flex-shrink-0">
+                                <i class="fas fa-file-pdf"></i>
                             </div>
-                            <div class="d-flex gap-2 w-100 w-md-auto justify-content-sm-start justify-content-md-end mt-2 mt-md-0">
-                                <a href="${item.linkBaca}" target="_blank" class="btn btn-view rounded-pill px-4 py-2 small"><i class="fas fa-eye me-1"></i> Baca</a>
-                                <a href="${item.linkUnduh}" download class="btn btn-download rounded-pill px-4 py-2 small"><i class="fas fa-download me-1"></i> Unduh</a>
+                            <div class="flex-grow-1">
+                                <span class="badge bg-warning mb-2">${item.kategori}</span>
+                                <h5 class="fw-bold text-dark mb-1">${item.judul}</h5>
+                                <p class="text-muted small mb-0">${item.deskripsi}</p>
                             </div>
                         </div>
+                        <div class="d-flex gap-2 w-100 w-md-auto justify-content-sm-start justify-content-md-end mt-2 mt-md-0">
+                            <a href="${item.linkBaca}" target="_blank" class="btn btn-view rounded-pill px-4 py-2 small"><i class="fas fa-eye me-1"></i> Baca</a>
+                            <a href="${item.linkUnduh}" download class="btn btn-download rounded-pill px-4 py-2 small"><i class="fas fa-download me-1"></i> Unduh</a>
+                        </div>
                     </div>
-                    `;
-                });
-
-                materiList.innerHTML = htmlContent;
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-                loading.innerHTML = '<p class="text-danger">Gagal memuat materi. Pastikan URL Web App sudah benar dan dapat diakses.</p>';
+                </div>
+                `;
             });
+
+            materiList.innerHTML = htmlContent;
+        }
 
         // Fitur Pencarian Dinamis
         document.getElementById('searchInput').addEventListener('input', function() {
