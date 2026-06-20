@@ -295,7 +295,7 @@
 
             const MATERI_CACHE_KEY = 'rk_materi_cache';
             const MATERI_TIME_KEY = 'rk_materi_time';
-            const CACHE_EXPIRY = 2 * 60 * 1000; // Cache 2 menit
+            const CACHE_EXPIRY = 15 * 1000; // Cache 15 detik
             const now = new Date().getTime();
 
             const cachedData = localStorage.getItem(MATERI_CACHE_KEY);
