@@ -2,720 +2,820 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="https://i.ibb.co.com/WN59bgvJ/logo-sekolah.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MIS Roudlotul Khuffadz</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
-            --primary: #17a24b; /* Hijau Islami */
-            --primary-dark: #0f6e32;
-            --secondary: #f0f842; /* Kuning Aksen */
-            --light: #ffffff; 
-            --bg-light: #f8faf9;
-            --dark: #2d3748;
+            --bg-color: #F9F9F6;
+            --text-dark: #1A1A1A;
+            --text-muted: #666666;
+            --accent-color: #E25E3E;
+            --green-school: #17a24b;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            color: var(--dark);
-            background-color: var(--bg-light);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
             overflow-x: hidden;
         }
 
-        /* Animasi Scroll Smooth & Fade In */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Navbar Premium Styling */
+        /* --- NAVBAR PREMIUM --- */
         .navbar {
-            background-color: var(--primary);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            padding: 12px 0;
-            transition: all 0.3s ease;
+            padding: 24px 40px;
+            background: transparent;
         }
         .navbar-brand {
-            font-size: 1.15rem;
-            letter-spacing: 0.5px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: -0.5px;
+            color: var(--text-dark) !important;
         }
-        .navbar-brand, .nav-link {
-            color: var(--light) !important;
-            font-weight: 600;
-        }
+        
         .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin: 0 16px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
             position: relative;
-            margin: 0 6px;
-            transition: color 0.3s ease;
         }
-        .nav-link::after {
+        
+        .nav-link:hover {
+            opacity: 1;
+        }
+
+        .nav-link:not(.btn-green-school)::after {
             content: '';
             position: absolute;
             width: 0;
             height: 2px;
-            bottom: 0;
+            bottom: -4px;
             left: 0;
-            background-color: var(--secondary);
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        .nav-link:hover {
-            color: var(--secondary) !important;
+            background-color: var(--green-school);
+            transition: width 0.3s ease-in-out;
         }
 
-        /* Hero Section Enhancements */
-        .hero {
-            background: linear-gradient(135deg, rgba(15,110,50,0.92), rgba(23,162,75,0.75)), url('https://i.ibb.co.com/PsfxS99P/Whats-App-Image-2026-05-26-at-08-44-13.jpg') center/cover;
-            color: var(--light);
-            padding: 140px 0;
-            text-align: center;
-            position: relative;
-        }
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
+        .nav-link:not(.btn-green-school):hover::after {
             width: 100%;
-            height: 160px;
-            background: linear-gradient(
-                to top,
-                #f9fbf9 0%,
-                rgba(249, 251, 249, 0.85) 20%,
-                rgba(249, 251, 249, 0.60) 42%,
-                rgba(249, 251, 249, 0.30) 67%,
-                rgba(249, 251, 249, 0.10) 85%,
-                transparent 100%
-            );
-        }
-        .hero-logo {
-            max-width: 140px;
-            margin-bottom: 25px;
-            filter: drop-shadow(0px 8px 16px rgba(0,0,0,0.25));
-        }
-        .hero h1 {
-            font-size: 3rem;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .btn-custom-primary {
-            background-color: var(--secondary);
-            color: #1a1a1a;
-            font-weight: 600;
-            border: none;
-            box-shadow: 0 4px 15px rgba(240,248,66,0.3);
-            transition: all 0.3s ease;
-        }
-        .btn-custom-primary:hover {
-            background-color: #e2eb2a;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(240,248,66,0.4);
-            color: #1a1a1a;
         }
 
-        /* SECTION STATISTIK UTAMA (CLEAN CORPORATE STYLE) */
-        .statistik-section {
-            background: linear-gradient(135deg, #0b4e24, #137e3a);
-            color: #ffffff;
-            padding: 80px 0;
-            position: relative;
-        }
-        .stat-box {
-            position: relative;
-            transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-        .stat-box:hover {
-            transform: translateY(-8px);
-        }
-        .stat-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: rgba(255, 255, 255, 0.35);
-            transition: color 0.3s ease;
-        }
-        .stat-box:hover .stat-icon {
-            color: #eab308;
-        }
-        .stat-box h2 {
-            font-size: 3.2rem;
-            font-weight: 700;
-            color: #eab308;
-            margin-bottom: 5px;
-            letter-spacing: -1px;
-        }
-        .stat-box p {
-            font-size: 0.95rem;
+        .btn-nav-dark {
+            background-color: var(--text-dark);
+            color: #fff !important;
+            border-radius: 50px;
+            padding: 10px 24px;
             font-weight: 500;
-            opacity: 0.85;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+            transition: transform 0.2s;
+        }
+        .btn-nav-dark:hover {
+            transform: scale(1.05);
         }
 
-        /* Sections General styling */
-        section {
-            padding: 90px 0;
+        .btn-green-school {
+            background-color: #17a24b !important;
+            color: #fff !important;
+            border-radius: 50px;
+            padding: 10px 24px;
+            font-weight: 500;
+            transition: transform 0.2s;
+            display: inline-block;
         }
-        .section-title {
-            color: var(--primary-dark);
-            font-weight: 700;
-            margin-bottom: 50px;
-            text-align: center;
+        
+        .btn-green-school:hover {
+            background-color: #148f3f !important;
+            transform: scale(1.05);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            padding: 60px 40px 100px;
+            background: radial-gradient(circle at top right, rgba(226, 94, 62, 0.15), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(23, 162, 75, 0.1), transparent 40%);
+        }
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            max-width: 90%;
+        }
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 40px;
+            max-width: 80%;
+        }
+        .hero-image-wrapper {
             position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
         }
-        .section-title::after {
-            content: '';
-            width: 70px;
-            height: 4px;
-            background-color: var(--secondary);
-            display: block;
-            margin: 12px auto 0;
-            border-radius: 4px;
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
         }
 
-        /* Premium Cards Design */
-        .card {
-            border: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        .glass-card {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.5);
+            padding: 16px 24px;
             border-radius: 16px;
-            overflow: hidden;
-            background: var(--light);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 16px;
         }
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            cursor: pointer;
+        .glass-card-1 { top: 40px; right: -20px; }
+        .glass-card-2 { bottom: 60px; right: 40px; }
+
+        .hero-stats {
+            margin-top: 80px;
+            display: flex;
+            gap: 60px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            padding-top: 40px;
         }
-        .news-img, .ekskul-img {
-            height: 220px;
-            object-fit: cover;
+        .stat-item h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .stat-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+            font-weight: 500;
+        }
+
+        /* --- TENTANG KAMI (KAMAD) SECTION --- */
+        .custom-about-card {
+            background-color: #ffffff;
+            border-radius: 40px;
+            padding: 80px 60px;
+            margin: 0 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .kamad-image-wrapper {
+            position: relative;
             width: 100%;
-            transition: transform 0.5s ease;
+            max-width: 380px;
+            border-radius: 24px;
+            overflow: visible;
         }
-        .card:hover .news-img, .card:hover .ekskul-img {
-            transform: scale(1.04);
-        }
-        .bg-green-light {
-            background-color: #f0f7f3;
-        }
-
-        /* Prestasi Section Styling */
-        .prestasi-section {
-            background: linear-gradient(135deg, #111, #1c281f);
-            color: var(--light);
-        }
-        .prestasi-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 10px auto;
-            max-width: 900px;
-        }
-        .prestasi-img-container {
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-            border: 3px solid rgba(240, 248, 66, 0.3);
-        }
-        .prestasi-img-container img {
+        .kamad-image-wrapper img {
             width: 100%;
-            height: 260px;
-            object-fit: cover;
+            height: auto;
+            border-radius: 24px;
+            display: block;
+            background-color: #e2f5e9; /* Background hijau halus jika foto PNG transparan */
+            box-shadow: 0 20px 40px rgba(23, 162, 75, 0.15);
         }
-
-        .carousel-control-prev, .carousel-control-next {
-            width: 5%;
-            opacity: 0.7;
-        }
-        .carousel-control-prev:hover, .carousel-control-next:hover {
-            opacity: 1;
-        }
-
-        .testi-card {
-            border-top: 4px solid var(--primary);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
-        }
-
-        .contact-icon-box {
-            width: 40px;
-            height: 40px;
-            background: rgba(23,162,75,0.1);
+        .kamad-badge {
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+            width: 70px;
+            height: 70px;
+            background-color: var(--green-school);
+            color: #fff;
             border-radius: 50%;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-dark);
+            font-size: 1.8rem;
+            border: 5px solid #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .bg-success-light { background-color: rgba(23, 162, 75, 0.1); }
+        .bg-warning-light { background-color: rgba(255, 193, 7, 0.1); }
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .visi-misi-card {
+            padding: 24px;
+            background: var(--bg-color);
+            border-radius: 20px;
+            height: 100%;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        .visi-misi-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* --- STICKY SCROLL SECTION --- */
+        .sticky-container {
+            position: relative;
+            padding: 120px 40px;
+            background: #fff;
+            border-radius: 40px;
+            margin: 0 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.03);
+        }
+        .sticky-left {
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+        }
+        .sticky-label {
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+        .sticky-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 30px;
+        }
+        
+        .scroll-item {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0.3;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateY(20px);
+        }
+        .scroll-item.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .scroll-visual {
+            background: var(--bg-color);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 24px;
+            position: relative;
+        }
+        .scroll-visual img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+        .scroll-desc {
+            background: #fff;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            max-width: 80%;
+            margin-top: -40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-outline-custom {
+            border: 1px solid var(--text-dark);
+            color: var(--text-dark);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-outline-custom:hover {
+            background: var(--text-dark);
+            color: #fff;
+        }
+
+        /* --- FOOTER CUSTOM --- */
+        .custom-footer {
+            background-color: #ffffff;
+            border-radius: 24px;
+            padding: 60px 40px 30px;
+            margin: 0 20px 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .footer-brand {
+            font-weight: 700;
             font-size: 1.1rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
         }
 
-        footer {
-            background-color: #0f1712;
-            color: rgba(255,255,255,0.7);
-            padding: 40px 0;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-        footer a {
-            transition: color 0.3s ease;
-        }
-        footer a:hover {
-            color: var(--secondary) !important;
+        .footer-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 90%;
         }
 
-        /* Skeleton Loader Animation */
-        @keyframes shimmer {
-            0% { background-position: -468px 0; }
-            100% { background-position: 468px 0; }
+        .footer-socials {
+            display: flex;
+            gap: 20px;
         }
-        .skeleton-box {
-            background: #e2e8f0;
-            background-image: linear-gradient(to right, #e2e8f0 0%, #f1f5f9 20%, #e2e8f0 40%, #e2e8f0 100%);
-            background-repeat: no-repeat;
-            background-size: 800px 100%; 
-            animation: shimmer 1.5s infinite linear forwards;
-            border-radius: 8px;
+
+        .footer-socials a {
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .footer-socials a:hover {
+            opacity: 0.6;
+        }
+
+        .footer-col-title {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 24px;
+            font-size: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 14px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-dark);
+        }
+
+        .footer-bottom {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-copyright {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-legal-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-legal-links a {
+            color: var(--text-muted);
+            text-decoration: underline;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-legal-links a:hover {
+            color: var(--text-dark);
+        }
+
+        /* --- RESPONSIVITAS --- */
+        @media (max-width: 768px) {
+            .navbar { padding: 16px 20px; }
+            .navbar-nav {
+                margin-top: 16px;
+                text-align: center;
+                background: #fff;
+                padding: 16px;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            }
+            .nav-item.ms-4 { margin-left: 0 !important; margin-top: 10px; }
+            
+            .hero-section { padding: 40px 20px 60px; text-align: center; }
+            .hero-title { font-size: 2.5rem; max-width: 100%; letter-spacing: -1px; }
+            .hero-subtitle { font-size: 1rem; max-width: 100%; }
+            .hero-section .d-flex.gap-3 { flex-direction: column; justify-content: center; }
+            .hero-section .btn { width: 100%; margin-bottom: 10px; }
+            .hero-stats { gap: 30px; margin-top: 40px; justify-content: center; flex-wrap: wrap; }
+            .hero-image-wrapper { margin-top: 40px; }
+            .hero-image-wrapper img { height: 400px; }
+            .glass-card { padding: 10px 16px; }
+            .glass-card h6 { font-size: 0.9rem; }
+            .glass-card-1 { top: 20px; right: 10px; }
+            .glass-card-2 { bottom: 20px; right: 10px; }
+
+            /* Responsive Tentang Kami */
+            .custom-about-card { padding: 40px 20px; margin: 0 10px; }
+            .kamad-image-wrapper { margin: 0 auto; max-width: 250px; }
+            .kamad-badge { bottom: -25px; right: 50%; transform: translateX(50%); }
+
+            .sticky-container { padding: 60px 20px; margin: 0 10px; }
+            .sticky-left { position: relative; top: 0; margin-bottom: 40px; text-align: center; }
+            .sticky-title { font-size: 2rem; }
+            .scroll-item { height: auto; padding-bottom: 40px; }
+            .scroll-visual { padding: 20px; }
+            .scroll-desc { max-width: 95% !important; }
+
+            .custom-footer { padding: 40px 20px 20px; margin: 0 10px 40px; }
+            .footer-col { margin-top: 40px; }
+            .footer-bottom { flex-direction: column; text-align: center; justify-content: center; }
+            .footer-socials { justify-content: center; }
+            .footer-brand, .footer-desc { text-align: center; margin-left: auto; margin-right: auto; }
         }
     </style>
 </head>
 <body>
 
-   <nav class="navbar navbar-expand-lg sticky-top">
-        <div class="container">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="index.html">
-                <div class="bg-white rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 42px; height: 42px; padding: 6px;">
-                    <img src="https://i.ibb.co.com/WN59bgvJ/logo-sekolah.png" alt="Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;">
-                </div>
-                <span class="fw-bold">MIS ROUDLOTUL KHUFFADZ</span>
+                <img src="https://i.ibb.co.com/WN59bgvJ/logo-sekolah.png" alt="Logo" style="width: 36px; margin-right: 12px;">
+                MIS ROUDLOTUL KHUFFADZ
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
+            
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="index.html#tentang">Tentang</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#berita">Berita</a></li>
-                    <li class="nav-item"><a class="nav-link" href="materi.html">Materi Siswa</a></li>
-                    <li class="nav-item"><a class="nav-link" href="panduanguru.html">Materi Guru</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#prestasi">Galeri</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#kontak">Kontak</a></li>
-                    <li class="nav-item"><a class="nav-link" href="sipintarrk.html">SIPINTAR-RK</a></li>
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#tentang">Tentang</a></li>
+                    <li class="nav-item"><a class="nav-link" href="materi.html">Materi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="panduanguru.html">Guru</a></li>
+                    <li class="nav-item ms-4"><a class="nav-link btn-green-school" href="sipintarrk.html">SIPINTAR-RK</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <section class="hero" id="beranda">
-        <div class="container fade-in">
-            <img src="https://i.ibb.co.com/WN59bgvJ/logo-sekolah.png" alt="Logo MIS Roudlotul Khuffadz" class="hero-logo">
-            <h1 class="display-5 fw-bold mb-3">MADRASAH IBTIDAIYAH SWASTA</h1>
-            <h1 class="display-5 fw-bold mb-3">ROUDLOTUL KHUFFADZ</h1>
-            <h4 class="mb-5 fst-italic fw-light opacity-90">"Unggul dalam Prestasi, Berkarakter dalam Budaya"</h4>
-            <div class="gap-2">
-                <a href="pendaftaran.html" class="btn btn-custom-primary btn-lg mx-2 mb-3 px-4 rounded-pill">Daftar Sekarang</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="sambutan" class="bg-green-light">
-        <div class="container fade-in">
+    <section class="hero-section">
+        <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-md-4 text-center mb-4 mb-md-0">
-                    <img src="https://i.ibb.co.com/4wm7HHXw/kamad.png" alt="Kepala Madrasah" class="img-fluid rounded-circle border border-5 border-white shadow-lg" style="max-width: 240px; height: 240px; object-fit: cover;">
-                    <h5 class="mt-3 fw-bold text-success mb-1">Ryan Trisnawati, S.Pd</h5>
-                    <small class="text-muted fw-medium">Kepala Madrasah</small>
-                </div>
-                <div class="col-md-8">
-                    <h2 class="section-title text-md-start">Sambutan Kepala Madrasah</h2>
-                    <p class="lead text-muted"><em>Assalamu'alaikum Warahmatullahi Wabarakatuh,</em></p>
-                    <p class="text-secondary lh-lg">Selamat datang di website resmi MIS Roudlotul Khuffadz, Kabupaten Sorong. Kami berkomitmen untuk mencetak generasi yang tidak hanya cerdas secara akademik, namun juga memiliki akhlak mulia dan menjunjung tinggi nilai-nilai budaya dan agama.</p>
-                    <p class="text-secondary lh-lg">Mari bergabung dan berkembang bersama kami untuk menciptakan masa depan yang gemilang. <br><em>Wassalamu'alaikum Warahmatullahi Wabarakatuh.</em></p>
-                </div>
-            </div>
-        </div>
-    </section>
+                <div class="col-lg-6 pe-lg-5">
+                    <h1 class="hero-title">Unggul dalam Prestasi, Berkarakter dalam Budaya.</h1>
+                    <p class="hero-subtitle">Mencetak generasi yang tidak hanya cerdas secara akademik, namun juga memiliki akhlak mulia dan menjunjung tinggi nilai-nilai agama Islam.</p>
+                    
+                    <div class="d-flex gap-3 align-items-center">
+                        <a href="pendaftaran.html" class="btn btn-green-school px-4 py-3 fs-5">Mulai Pendaftaran</a>
+                        <a href="https://www.facebook.com/mi.roudlotulkhuffadz.50?locale=id_ID" class="btn-outline-custom py-3 px-4 fs-5"><i class="fas fa-play"></i> Lihat Profil</a>
+                    </div>
 
-    <section id="tentang">
-        <div class="container fade-in">
-            <h2 class="section-title">Tentang Sekolah</h2>
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="card h-100 p-4 shadow-sm border-0">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="contact-icon-box me-3"><i class="fas fa-history text-success"></i></div>
-                            <h4 class="text-success fw-bold m-0">Sejarah Singkat</h4>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <h3>180+</h3>
+                            <p>Siswa Aktif</p>
                         </div>
-                        <p class="text-muted lh-lg">MIS Roudlotul Khuffadz didirikan sebagai pusat pendidikan Islam tingkat dasar di Kabupaten Sorong. Sejak berdirinya, madrasah ini terus berinovasi mengintegrasikan kurikulum nasional dengan pendidikan karakter Islami.</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card h-100 p-4 bg-success text-white shadow-sm border-0">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="me-3 d-inline-flex align-items-center justify-content-center text-white bg-white bg-opacity-25 rounded-circle" style="width: 40px; height: 40px; font-size: 1.1rem;">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <h4 class="m-0 fw-bold">Visi & Misi</h4>
+                        <div class="stat-item">
+                            <h3>12</h3>
+                            <p>Guru & Staf</p>
                         </div>
-                        <p class="mb-2"><strong>Visi:</strong> Mewujudkan generasi yang unggul dalam ilmu pengetahuan, tangguh dalam iman, dan berakhlakul karimah.</p>
-                        <p class="mb-0"><strong>Misi:</strong><br>
-                        1. Menyelenggarakan pembelajaran aktif, inovatif, dan menyenangkan.<br>
-                        2. Membina karakter siswa melalui pembiasaan nilai agama dan budaya.<br>
-                        3. Mengembangkan bakat dan minat siswa melalui kegiatan intrakurikuler dan ekstrakurikuler.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="statistik" class="statistik-section text-center">
-        <div class="container fade-in">
-            <div class="row g-4">
-                <div class="col-md-3 col-6">
-                    <div class="stat-box p-3">
-                        <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
-                        <h2>180+</h2>
-                        <p class="mb-0">Siswa Aktif</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="stat-box p-3">
-                        <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-                        <h2>12</h2>
-                        <p class="mb-0">Guru & Staf</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="stat-box p-3">
-                        <div class="stat-icon"><i class="fas fa-school"></i></div>
-                        <h2>7</h2>
-                        <p class="mb-0">Kelas Belajar</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="stat-box p-3">
-                        <div class="stat-icon"><i class="fas fa-trophy"></i></div>
-                        <h2>25+</h2>
-                        <p class="mb-0">Total Prestasi</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="berita" class="bg-light">
-        <div class="container fade-in">
-            <h2 class="section-title">Berita & Kegiatan Terbaru</h2>
-            
-            <div id="loading-berita" class="row g-4">
-                <div class="col-md-4"><div class="card h-100 p-0"><div class="skeleton-box" style="height: 220px; border-radius: 16px 16px 0 0;"></div><div class="p-4"><div class="skeleton-box mb-3" style="height: 25px; width: 40%; border-radius: 50px;"></div><div class="skeleton-box mb-2" style="height: 20px; width: 90%;"></div><div class="skeleton-box mb-3" style="height: 20px; width: 70%;"></div><div class="skeleton-box mt-4 ms-auto" style="height: 15px; width: 50%;"></div></div></div></div>
-                <div class="col-md-4 d-none d-md-block"><div class="card h-100 p-0"><div class="skeleton-box" style="height: 220px; border-radius: 16px 16px 0 0;"></div><div class="p-4"><div class="skeleton-box mb-3" style="height: 25px; width: 40%; border-radius: 50px;"></div><div class="skeleton-box mb-2" style="height: 20px; width: 90%;"></div><div class="skeleton-box mb-3" style="height: 20px; width: 70%;"></div><div class="skeleton-box mt-4 ms-auto" style="height: 15px; width: 50%;"></div></div></div></div>
-                <div class="col-md-4 d-none d-md-block"><div class="card h-100 p-0"><div class="skeleton-box" style="height: 220px; border-radius: 16px 16px 0 0;"></div><div class="p-4"><div class="skeleton-box mb-3" style="height: 25px; width: 40%; border-radius: 50px;"></div><div class="skeleton-box mb-2" style="height: 20px; width: 90%;"></div><div class="skeleton-box mb-3" style="height: 20px; width: 70%;"></div><div class="skeleton-box mt-4 ms-auto" style="height: 15px; width: 50%;"></div></div></div></div>
-            </div>
-
-            <div class="row g-4" id="berita-container" style="display: none;">
-                </div>
-        </div>
-    </section>
-
-    <section id="ekskul">
-        <div class="container fade-in">
-            <h2 class="section-title">Program Ekstrakurikuler</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="position-relative overflow-hidden">
-                            <img src="https://i.ibb.co.com/pv3KqMzn/IMG-6145.jpg" class="card-img-top ekskul-img" alt="Hadrah">
-                        </div>
-                        <div class="card-body p-4 text-center">
-                            <h4 class="fw-bold text-success mb-3"><i class="fas fa-drum text-warning me-2"></i>Hadrah</h4>
-                            <p class="card-text text-muted small lh-lg">Mengembangkan kecintaan pada kesenian Islam dan shalawat nabi untuk menanamkan nilai religius.</p>
+                        <div class="stat-item">
+                            <h3>25+</h3>
+                            <p>Total Prestasi</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="position-relative overflow-hidden">
-                            <img src="https://i.ibb.co.com/nNwYwD2j/Whats-App-Image-2026-06-08-at-12-04-58.jpg" class="card-img-top ekskul-img" alt="Pramuka">
-                        </div>
-                        <div class="card-body p-4 text-center">
-                            <h4 class="fw-bold text-success mb-3"><i class="fas fa-campground text-warning me-2"></i>Pramuka</h4>
-                            <p class="card-text text-muted small lh-lg">Membentuk karakter disiplin, mandiri, jiwa kepemimpinan, dan kecintaan pada alam sekitar.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="position-relative overflow-hidden">
-                            <img src="https://i.ibb.co.com/W4QSvvj4/Screenshot-2026-06-08-120837.png" class="card-img-top ekskul-img" alt="Seni Tari">
-                        </div>
-                        <div class="card-body p-4 text-center">
-                            <h4 class="fw-bold text-success mb-3"><i class="fas fa-child text-warning me-2"></i>Seni Tari</h4>
-                            <p class="card-text text-muted small lh-lg">Melestarikan budaya lokal dan nasional melalui gerak seni tari tradisional dan kreasi daerah.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="prestasi" class="prestasi-section">
-        <div class="container fade-in">
-            <h2 class="section-title text-warning">Galeri Madrasah</h2>
-            
-            <div id="loading-galeri" class="text-center py-5">
-                <div class="spinner-border text-warning" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-                <p class="mt-3 text-light opacity-75 small">Memuat galeri...</p>
-            </div>
-
-            <div id="prestasiCarousel" class="carousel slide" data-bs-ride="carousel" style="display: none;">
-                <div class="carousel-inner" id="galeri-container">
-                    </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#prestasiCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Sebelumnya</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#prestasiCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Selanjutnya</span>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <section id="testimoni" class="bg-light">
-        <div class="container fade-in">
-            <h2 class="section-title">Apa Kata Mereka?</h2>
-            <div class="row g-4 text-center">
-                <div class="col-md-6">
-                    <div class="card p-4 testi-card h-100 border-0 shadow-sm">
-                        <p class="fst-italic text-secondary lh-lg">"Sekolah di MIS Roudlotul Khuffadz sangat menyenangkan. Gurunya sabar dan kegiatan ekskulnya bikin saya semangat!"</p>
-                        <h6 class="fw-bold mt-3 text-success mb-0">- Yeni, Alumni MIS Roudlotul Khuffadz Angkatan XIV </h6>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card p-4 testi-card h-100 border-0 shadow-sm" style="border-top-color: var(--secondary) !important;">
-                        <p class="fst-italic text-secondary lh-lg">"Pondasi agama dan akhlak anak saya sangat terbentuk baik sejak bersekolah di sini. Fasilitas pendidikannya juga semakin maju."</p>
-                        <h6 class="fw-bold mt-3 text-success mb-0">- Ibu Siti, Wali Murid</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="kontak" class="bg-green-light">
-        <div class="container fade-in">
-            <h2 class="section-title">Hubungi Kami</h2>
-            <div class="row g-4">
-                <div class="col-md-5">
-                    <div class="card p-4 h-100 shadow-sm border-0">
-                        <h4 class="text-success fw-bold mb-4">Informasi Kontak</h4>
+                
+                <div class="col-lg-6 mt-5 mt-lg-0">
+                    <div class="hero-image-wrapper">
+                        <img src="https://i.ibb.co.com/PsfxS99P/Whats-App-Image-2026-05-26-at-08-44-13.jpg" alt="Siswa MIS Roudlotul Khuffadz">
                         
-                        <div class="d-flex align-items-start mb-3">
-                            <div class="contact-icon-box me-3"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="glass-card glass-card-1">
+                            <div class="text-success fs-3"><i class="fas fa-check-circle"></i></div>
                             <div>
-                                <strong class="d-block text-dark">Alamat:</strong>
-                                <span class="text-muted small">Aimas Kabupaten Sorong, Papua Barat Daya</span>
+                                <h6 class="mb-0 fw-bold">Terakreditasi</h6>
+                                <small class="text-muted">Kualitas Terjamin</small>
                             </div>
                         </div>
-
-                        <div class="d-flex align-items-start mb-3">
-                            <div class="contact-icon-box me-3"><i class="fas fa-phone"></i></div>
+                        <div class="glass-card glass-card-2">
+                            <div class="text-warning fs-3"><i class="fas fa-star"></i></div>
                             <div>
-                                <strong class="d-block text-dark">Telepon:</strong>
-                                <span class="text-muted small">+62 822 4826 6027</span>
+                                <h6 class="mb-0 fw-bold">Fasilitas Lengkap</h6>
+                                <small class="text-muted">Mendukung Belajar</small>
                             </div>
                         </div>
-
-                        <div class="d-flex align-items-start mb-3">
-                            <div class="contact-icon-box me-3"><i class="fab fa-instagram"></i></div>
-                            <div>
-                                <strong class="d-block text-dark">Instagram:</strong>
-                                <a href="https://www.instagram.com/mi.roudlotulkhuffadz/" target="_blank" class="text-decoration-none text-success small fw-medium">@mi.roudlotulkhuffadz</a>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-start mb-4">
-                            <div class="contact-icon-box me-3"><i class="fab fa-facebook"></i></div>
-                            <div>
-                                <strong class="d-block text-dark">Facebook:</strong>
-                                <a href="https://www.facebook.com/mi.roudlotulkhuffadz.50/#" target="_blank" class="text-decoration-none text-success small fw-medium">MI Roudlotul Khuffadz</a>
-                            </div>
-                        </div>
-                        
-                        <a href="https://maps.app.goo.gl/Sapb1EXTiFPrg2VX6" target="_blank" class="btn btn-success mt-auto py-2.5 rounded-pill shadow-sm">
-                            <i class="fas fa-location-arrow me-2"></i> Buka via Google Maps App
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="card p-2 h-100 shadow-sm border-0">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127504.42581673809!2d131.2505505!3d-0.8812608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d59550b73c4d7d3%3A0xb37064d1f5686034!2sSorong%2C%20Sorong%20City%2C%20West%20Papua!5e0!3m2!1sen!2sid!4v1698227651001!5m2!1sen!2sid" 
-                            width="100%" 
-                            height="100%" 
-                            style="border:0; min-height: 350px; border-radius: 12px;" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="container text-center">
-            <p class="mb-2 text-white opacity-80">© 2026 MIS Roudlotul Khuffadz. Semua Hak Dilindungi.</p>
-            <small class="text-white-50 d-block">
-                Developed by 
-                <a href="#" class="text-warning text-decoration-none fw-semibold">W.B.P</a>
-            </small>
+    <!-- SECTION BARU: TENTANG KAMI (PROFIL KAMAD & VISI MISI) -->
+    <section class="about-section mt-5" id="tentang">
+        <div class="container-fluid px-2 px-lg-4">
+            <div class="row align-items-center custom-about-card">
+                
+                <div class="col-lg-4 text-center text-lg-start mb-5 mb-lg-0">
+                    <div class="kamad-image-wrapper mx-auto mx-lg-0">
+                        <!-- Menggunakan Link Gambar Kepala Madrasah Anda -->
+                        <img src="https://i.ibb.co.com/4wm7HHXw/kamad.png" alt="Ryan Trisnawati, S.Pd - Kepala Madrasah">
+                        <div class="kamad-badge">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                    </div>
+                    <div class="mt-5 mt-lg-4 text-center">
+                        <h4 class="fw-bold mb-1">Ryan Trisnawati, S.Pd</h4>
+                        <p class="text-success fw-medium mb-0">Kepala MIS Roudlotul Khuffadz</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-7 offset-lg-1">
+                    <div class="about-content text-center text-lg-start">
+                        <div class="sticky-label text-success mb-2">Tentang Kami</div>
+                        <h2 class="fw-bold mb-4" style="font-size: 2.5rem; letter-spacing: -1px;">Membangun Generasi Cerdas & Berakhlakul Karimah.</h2>
+                        <p class="text-muted fs-5 mb-5" style="line-height: 1.8;">
+                            "Selamat datang di MIS Roudlotul Khuffadz. Kami berkomitmen memberikan pendidikan terbaik yang mengintegrasikan ilmu pengetahuan umum dan nilai-nilai ajaran agama Islam. Madrasah ini bukan sekadar tempat belajar, melainkan rumah kedua bagi anak-anak untuk tumbuh menjadi generasi yang tangguh, berprestasi, dan siap menghadapi tantangan masa depan dengan iman."
+                        </p>
+                        
+                        <div class="row mt-4 text-start">
+                            <div class="col-md-6 mb-4 mb-md-0">
+                                <div class="visi-misi-card">
+                                    <div class="icon-box bg-success-light text-success mb-3">
+                                        <i class="fas fa-eye fs-4"></i>
+                                    </div>
+                                    <h5 class="fw-bold mb-3">Visi Kami</h5>
+                                    <p class="text-muted fs-6 mb-0" style="line-height: 1.6;">
+                                        Terwujudnya madrasah yang unggul dalam prestasi, tangguh berkarakter Islami, dan berwawasan lingkungan menuju generasi yang *Rahmatan Lil 'Alamin*.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="visi-misi-card">
+                                    <div class="icon-box bg-warning-light text-warning mb-3">
+                                        <i class="fas fa-bullseye fs-4"></i>
+                                    </div>
+                                    <h5 class="fw-bold mb-3">Misi Kami</h5>
+                                    <ul class="text-muted fs-6 ps-3 mb-0" style="line-height: 1.6;">
+                                        <li class="mb-2">Menanamkan aqidah yang kuat dan akhlakul karimah.</li>
+                                        <li class="mb-2">Melaksanakan pembelajaran yang aktif, kreatif, dan inovatif.</li>
+                                        <li>Mengembangkan potensi dan bakat siswa secara optimal.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section class="sticky-container mt-5" id="ekskul">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="sticky-left">
+                        <div class="sticky-label text-success">Program Ekstrakurikuler</div>
+                        <h2 class="sticky-title">Fasilitas untuk mengembangkan bakat dan minat siswa secara optimal.</h2>
+                        <p class="text-muted fs-5">Kami menyediakan berbagai kegiatan di luar jam pelajaran untuk membentuk karakter, disiplin, dan kreativitas anak.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 offset-lg-1">
+                    
+                    <div class="scroll-item active" id="item-1">
+                        <div class="scroll-visual">
+                            <img src="https://i.ibb.co.com/pv3KqMzn/IMG-6145.jpg" alt="Hadrah">
+                        </div>
+                        <div class="scroll-desc">
+                            <h4 class="fw-bold mb-2">Seni Hadrah</h4>
+                            <p class="text-muted mb-0">Mengembangkan kecintaan pada kesenian Islam dan shalawat nabi untuk menanamkan nilai religius sejak dini.</p>
+                        </div>
+                    </div>
+
+                    <div class="scroll-item" id="item-2">
+                        <div class="scroll-visual">
+                            <img src="https://i.ibb.co.com/nNwYwD2j/Whats-App-Image-2026-06-08-at-12-04-58.jpg" alt="Pramuka">
+                        </div>
+                        <div class="scroll-desc">
+                            <h4 class="fw-bold mb-2">Pramuka</h4>
+                            <p class="text-muted mb-0">Membentuk karakter disiplin, mandiri, jiwa kepemimpinan, dan kecintaan pada alam sekitar melalui kegiatan kepramukaan.</p>
+                        </div>
+                    </div>
+
+                    <div class="scroll-item" id="item-3">
+                        <div class="scroll-visual">
+                            <img src="https://i.ibb.co.com/W4QSvvj4/Screenshot-2026-06-08-120837.png" alt="Seni Tari">
+                        </div>
+                        <div class="scroll-desc">
+                            <h4 class="fw-bold mb-2">Seni Tari</h4>
+                            <p class="text-muted mb-0">Melestarikan budaya lokal dan nasional melalui gerak seni tari tradisional dan kreasi daerah bagi para siswa.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sticky-container mt-5" id="berita" style="background-color: #f4fdf6; border: 1px solid #e2f5e9;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="sticky-left">
+                        <div class="sticky-label text-success">Kabar & Update</div>
+                        <h2 class="sticky-title">Berita Terbaru dari Sekolah Kami.</h2>
+                        <p class="text-muted fs-5">Ikuti terus perkembangan, kegiatan, dan prestasi terbaru dari siswa-siswi serta guru MIS Roudlotul Khuffadz.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 offset-lg-1" id="berita-scroll-container">
+                    
+                    <div id="loading-berita" class="d-flex flex-column justify-content-center align-items-center" style="height: 50vh;">
+                        <div class="spinner-border text-success mb-3" role="status" style="width: 3rem; height: 3rem;">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="text-muted fw-medium">Sedang menarik data berita...</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="custom-footer">
+        <div class="row">
+            <div class="col-lg-5 mb-5 mb-lg-0">
+                <a href="index.html" class="footer-brand">
+                    <img src="https://i.ibb.co.com/WN59bgvJ/logo-sekolah.png" alt="Logo" style="width: 24px;">
+                    MIS ROUDLOTUL KHUFFADZ
+                </a>
+                <p class="footer-desc">
+                    Memberdayakan siswa untuk mengubah potensi mentah menjadi prestasi yang nyata — menjadikan pendidikan lebih mudah dipahami, dibagikan, dan diamalkan.
+                </p>
+                <div class="footer-socials">
+                    <a href="https://www.facebook.com/mi.roudlotulkhuffadz.50?locale=id_ID"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/mi.roudlotulkhuffadz/"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://wa.me/6282248266027?text=Assalamualaikum,%20saya%20ingin%20bertanya%20tentang%20informasi%20sekolah."><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-7">
+                <div class="row">
+                    <div class="col-6 col-md-4 footer-col">
+                        <h5 class="footer-col-title">Program</h5>
+                        <ul class="footer-links">
+                            <li><a href="sipintarrk.html">Fitur Akademik</a></li>
+                            <li><a href="pendaftaran.html">Biaya & Pendaftaran</a></li>
+                            <li><a href="#ekskul">Ekstrakurikuler</a></li>
+                            <li><a href="#berita">Pembaruan Info</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-4 footer-col">
+                        <h5 class="footer-col-title">Sumber Daya</h5>
+                        <ul class="footer-links">
+                            <li><a href="https://www.instagram.com/mi.roudlotulkhuffadz/">Dokumentasi</a></li>
+                            <li><a href="#">Pusat Bantuan</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-4 footer-col mt-4 mt-md-0">
+                        <h5 class="footer-col-title">Sekolah</h5>
+                        <ul class="footer-links">
+                            <li><a href="#tentang">Tentang Kami</a></li>
+                            <li><a href="https://maps.app.goo.gl/erHtXGyUEJXTAij87">Lokasi</a></li>
+                            <li><a href="https://wa.me/6282248266027?text=Assalamualaikum,%20saya%20ingin%20bertanya%20tentang%20prosedur%20bermitra.">Kemitraan</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-copyright">
+                © 2026 MIS Roudlotul Khuffadz | Developed by W.B.P | All rights reserved
+            </div>
+            <div class="footer-legal-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="syarat.html">Terms of Service</a>
+                <a href="cookies.html">Cookies Settings</a>
+            </div>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwRF85cNbbwzolIsMRSWdej8gb9MUlk_jhuHOHjnEzPHmU8no3r9GjCFUQXkkOLnlEh/exec';
 
-        async function loadData() {
-            const CACHE_KEY = 'rk_data_cache';
-            const CACHE_TIME_KEY = 'rk_data_time';
-            const CACHE_EXPIRY = 5 * 60 * 1000; // Cache valid 5 menit
-            const now = new Date().getTime();
-
-            const cachedData = localStorage.getItem(CACHE_KEY);
-            const cacheTime = localStorage.getItem(CACHE_TIME_KEY);
-
-            if (cachedData && cacheTime && (now - cacheTime < CACHE_EXPIRY)) {
-                renderUI(JSON.parse(cachedData));
-                return;
-            }
-
-            try {
-                const response = await fetch(scriptURL);
-                const data = await response.json();
-                
-                localStorage.setItem(CACHE_KEY, JSON.stringify(data));
-                localStorage.setItem(CACHE_TIME_KEY, now.toString());
-                
-                renderUI(data);
-            } catch (error) {
-                console.error('Error memuat data:', error);
-                document.getElementById('loading-berita').innerHTML = '<p class="text-danger text-center">Gagal memuat berita. Pastikan koneksi internet stabil.</p>';
-            }
-        }
-
-        function renderUI(data) {
-            // --- 1. RENDER BERITA ---
-            const containerBerita = document.getElementById('berita-container');
-            const loadingBerita = document.getElementById('loading-berita');
-            let htmlBerita = '';
-
-            if (data.berita && data.berita.length > 0) {
-                data.berita.forEach(item => {
-                    let badgeClass = 'bg-success'; 
-                    let kategoriLower = item.Kategori ? item.Kategori.toLowerCase() : '';
-                    if(kategoriLower.includes('kegiatan')) { badgeClass = 'bg-warning text-dark'; } 
-                    else if(kategoriLower.includes('pengumuman')) { badgeClass = 'bg-info text-dark'; }
-
-                    let linkIcon = item.Link && item.Link.includes('instagram.com') ? 'fab fa-instagram ms-1' : 'fas fa-arrow-right ms-1';
-                    let linkText = item.Link && item.Link.includes('instagram.com') ? 'Lihat di Instagram' : 'Baca Selengkapnya';
-
-                    htmlBerita += `
-                        <div class="col-md-4">
-                            <div class="card h-100 position-relative">
-                                <div class="position-relative overflow-hidden">
-                                    <img src="${item.Gambar}" class="card-img-top news-img" alt="${item.Judul}">
-                                </div>
-                                <div class="card-body p-4 d-flex flex-column justify-content-between">
-                                    <div>
-                                        <span class="badge ${badgeClass} mb-2 px-2.5 py-1.5 rounded-pill fw-semibold">${item.Kategori}</span>
-                                        <h5 class="card-title fw-bold text-dark">${item.Judul}</h5>
-                                        <p class="card-text text-muted small lh-lg">${item.Deskripsi}</p>
-                                    </div>
-                                    <div class="text-end mt-3">
-                                        <a href="${item.Link}" target="_blank" class="stretched-link text-decoration-none text-success small fw-semibold">${linkText} <i class="${linkIcon}"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-                containerBerita.innerHTML = htmlBerita;
-                loadingBerita.style.display = 'none';
-                containerBerita.style.display = 'flex';
-            }
-
-            // --- 2. RENDER GALERI ---
-            const containerGaleri = document.getElementById('galeri-container');
-            const loadingGaleri = document.getElementById('loading-galeri');
-            const carousel = document.getElementById('prestasiCarousel');
-            let htmlGaleri = '';
-
-            if (data.galeri && data.galeri.length > 0) {
-                data.galeri.forEach((item, index) => {
-                    let activeClass = index === 0 ? 'active' : '';
-                    let iconClass = item.Ikon ? item.Ikon : 'fas fa-award';
-                    
-                    htmlGaleri += `
-                        <div class="carousel-item ${activeClass}">
-                            <div class="prestasi-card">
-                                <div class="row align-items-center g-4">
-                                    <div class="col-md-6">
-                                        <div class="prestasi-img-container">
-                                            <img src="${item.Gambar}" alt="${item.Judul}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 text-start">
-                                        <span class="text-warning fw-bold text-uppercase tracking-wider small d-block mb-1">${item.Label}</span>
-                                        <h3 class="fw-bold text-white mb-3"><i class="${iconClass} text-warning me-2"></i>${item.Judul}</h3>
-                                        <p class="text-light opacity-75 lh-lg">${item.Deskripsi}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-                containerGaleri.innerHTML = htmlGaleri;
-                if(loadingGaleri) loadingGaleri.style.display = 'none';
-                carousel.style.display = 'block';
-            }
-        }
-
-        // Script untuk Animasi Scroll (Fade In)
-        document.addEventListener("DOMContentLoaded", function() {
-            loadData();
-
+        function observeScrollItems() {
+            const items = document.querySelectorAll('.scroll-item');
+            
             const observerOptions = {
                 root: null,
-                rootMargin: '0px',
-                threshold: 0.15
+                rootMargin: '-20% 0px -40% 0px',
+                threshold: 0.5
             };
 
-            const observer = new IntersectionObserver((entries, observer) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
+                        const parentContainer = entry.target.closest('.sticky-container');
+                        if(parentContainer) {
+                            const siblings = parentContainer.querySelectorAll('.scroll-item');
+                            
+                            siblings.forEach(item => item.classList.remove('active'));
+                            entry.target.classList.add('active');
+                        }
                     }
                 });
             }, observerOptions);
 
-            const elements = document.querySelectorAll('.fade-in');
-            elements.forEach(el => observer.observe(el));
+            items.forEach(item => observer.observe(item));
+        }
+
+        async function loadBerita() {
+            try {
+                const response = await fetch(scriptURL);
+                const data = await response.json();
+                
+                const container = document.getElementById('berita-scroll-container');
+                
+                if (data.berita && data.berita.length > 0) {
+                    let htmlContent = '';
+                    
+                    data.berita.forEach((item, index) => {
+                        let activeClass = index === 0 ? 'active' : '';
+                        
+                        htmlContent += `
+                            <div class="scroll-item ${activeClass}">
+                                <div class="scroll-visual position-relative">
+                                    <img src="${item.Gambar}" alt="${item.Judul}" style="width: 100%; height: 300px; object-fit: cover; border-radius: 16px;">
+                                    <span class="badge bg-success position-absolute top-0 start-0 m-3 px-3 py-2 shadow-sm" style="z-index: 5;">
+                                        ${item.Kategori}
+                                    </span>
+                                </div>
+                                <div class="scroll-desc mx-auto shadow-sm" style="max-width: 85%; margin-top: -35px; position: relative; z-index: 10;">
+                                    <h4 class="fw-bold mb-2 text-truncate" title="${item.Judul}">${item.Judul}</h4>
+                                    <p class="text-muted mb-4" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                                        ${item.Deskripsi}
+                                    </p>
+                                    <a href="${item.Link}" target="_blank" class="btn-outline-custom" style="padding: 8px 20px; font-size: 0.9rem;">
+                                        Baca Selengkapnya <i class="fas fa-arrow-right ms-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    container.innerHTML = htmlContent;
+                    observeScrollItems();
+                    
+                } else {
+                    container.innerHTML = `
+                        <div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+                            <p class="text-muted fs-5">Belum ada berita yang dipublikasikan.</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error memuat berita:', error);
+                document.getElementById('loading-berita').innerHTML = `
+                    <div class="text-center text-danger mt-5">
+                        <i class="fas fa-exclamation-circle fs-2 mb-3"></i>
+                        <p class="mt-3 fw-medium">Gagal memuat berita dari database.<br>Pastikan koneksi internet stabil.</p>
+                    </div>
+                `;
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            observeScrollItems();
+            loadBerita();
         });
     </script>
 </body>
